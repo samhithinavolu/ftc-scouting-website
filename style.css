@@ -1,0 +1,198 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #2d5758;
+    color: white;
+    min-height: 100vh;
+}
+
+/* --- SCREENS --- */
+.screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- HOME SCREEN --- */
+#homeScreen {
+    align-items: center;
+    justify-content: center;
+}
+
+#homeScreen h1 {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #aaaaaa;
+    margin-bottom: 40px;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- TOP BAR --- */
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    background-color: #16213e;
+}
+
+.topbar h2 {
+    font-size: 20px;
+}
+
+/* --- CONTENT AREA --- */
+.content {
+    padding: 24px;
+    flex: 1;
+}
+
+/* --- BUTTONS --- */
+.btn {
+    display: block;
+    width: 220px;
+    padding: 12px;
+    margin: 8px;
+    background-color: #987f0f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #7a650c;
+}
+
+.btn-back {
+    background: none;
+    border: 1px solid #987f0f;
+    color: #aaaaaa;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-back:hover {
+    background-color: #7a650c;
+}
+
+.btn-small {
+    background-color: #987f0f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    margin-right: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-small:hover {
+    background-color: #7a650c;
+}
+
+/* --- FORM --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 12px;
+    max-width: 500px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-grid label {
+    color: #aaaaaa;
+    font-size: 14px;
+}
+
+.form-grid input,
+.form-grid textarea {
+    background-color: #16213e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: white;
+    font-size: 14px;
+    width: 100%;
+}
+
+.form-grid input:focus,
+.form-grid textarea:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+.form-grid textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+/* --- RANKINGS TABLE --- */
+.sort-btns {
+    margin-bottom: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #16213e;
+    padding: 12px;
+    text-align: left;
+    font-size: 13px;
+    color: #aaaaaa;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ffffff11;
+    font-size: 14px;
+}
+
+tr:hover td {
+    background-color: #ffffff08;
+}
+
+#rankingsSearch {
+    background-color: #16213e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: white;
+    font-size: 14px;
+    width: 300px;
+    margin-bottom: 16px;
+}
+
+#rankingsSearch:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+.highlight {
+    background-color: #1a472a;
+}

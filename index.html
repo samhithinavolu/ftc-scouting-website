@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTC Scouting App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HOME SCREEN -->
+    <div id="homeScreen" class="screen">
+        <h1>FTC Scouting App</h1>
+        <div class="btn-group">
+            <button class="btn" id="teamsBtn">View Teams</button>
+            <button class="btn" id="logMatchBtn">Log Match</button>
+            <button class="btn" id="rankingsBtn">Rankings</button>
+        </div>
+    </div>
+
+    <!-- TEAMS SCREEN -->
+    <div id="teamsScreen" class="screen hidden">
+        <div class="topbar">
+            <button class="btn-back" id="teamsBackBtn">← Back</button>
+            <h2>Teams</h2>
+        </div>
+        <div class="content">
+            <table id="teamsTable">
+                <thead>
+                    <tr>
+                        <th>Team #</th>
+                        <th>Team Name</th>
+                    </tr>
+                </thead>
+                <tbody id="teamsBody">
+                </tbody>
+            </table>
+            <!-- you'll add your teams table here -->
+        </div>
+    </div>
+
+    <!-- LOG MATCH SCREEN -->
+    <div id="logMatchScreen" class="screen hidden">
+        <div class="topbar">
+            <button class="btn-back" id="logMatchBackBtn">← Back</button>
+            <h2>Log Match</h2>
+        </div>
+        <div class="content">
+            <div class="form-grid">
+                <label>Team Number</label>
+                <input type="number" id="teamNumberInput" placeholder="e.g. 25780" />
+                <label>Match Number</label>
+                <input type="number" id="matchNumberInput" placeholder="e.g. 1" />
+                <label>Auto Score</label>
+                <input type="number" id="autoScoreInput" placeholder="e.g. 30" />
+                <label>Tele Score</label>
+                <input type="number" id="teleScoreInput" placeholder="e.g. 85" />
+                <label>Defense Rating (1-5)</label>
+                <input type="number" id="defenseRatingInput" min="1" max="5" placeholder="1-5" />
+                <label>Reliability Rating (1-5)</label>
+                <input type="number" id="reliabilityRatingInput" min="1" max="5" placeholder="1-5" />
+                <label>Notes</label>
+                <textarea id="notesInput" placeholder="e.g. Strong autonomous..."></textarea>
+            </div>
+            <button class="btn" id="saveEntryBtn">Save Entry</button>
+        </div>
+    </div>
+
+    <!-- RANKINGS SCREEN -->
+    <div id="rankingsScreen" class="screen hidden">
+        <div class="topbar">
+            <button class="btn-back" id="rankingsBackBtn">← Back</button>
+            <h2>Rankings</h2>
+        </div>
+        <div class="content">
+            <input type="text" id="rankingsSearch" placeholder="Search by team number..." />
+            <div class="sort-btns">
+                <button class="btn-small" id="sortAutoBtn">Sort by Auto</button>
+                <button class="btn-small" id="sortTeleBtn">Sort by Tele</button>
+                <button class="btn-small" id="sortTotalBtn">Sort by Total</button>
+            </div>
+            <table id="rankingsTable">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Team #</th>
+                        <th>Team Name</th>
+                        <th>Avg Auto</th>
+                        <th>Avg Tele</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="rankingsBody">
+                    <!-- you'll fill this in with javascript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
