@@ -15,6 +15,7 @@
             <button class="btn" id="teamsBtn">View Teams</button>
             <button class="btn" id="logMatchBtn">Log Match</button>
             <button class="btn" id="rankingsBtn">Rankings</button>
+            <button class="btn" id="allianceBtn">Alliance Selection</button>
         </div>
     </div>
 
@@ -96,6 +97,28 @@
                     <!-- you'll fill this in with javascript -->
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <!-- ALLIANCE SELECTION SCREEN -->
+    <div id="allianceScreen" class="screen hidden">
+        <div class="topbar">
+            <button class="btn-back" id="allianceBackBtn">← Back</button>
+            <h2>Alliance Selection</h2>
+        </div>
+        <div class="content">
+            <p class="subtitle">Drag and drop teams to rank them for alliance selection</p>
+            <div id="allianceList">
+            </div>
+        </div>
+
+        <!-- Notes popup -->
+        <div id="notesPopup" class="popup hidden">
+            <div class="popup-box">
+                <h3 id="popupTeamName"></h3>
+                <p id="popupNotes"></p>
+                <button class="btn-small" id="closePopupBtn">Close</button>
+            </div>
         </div>
     </div>
 

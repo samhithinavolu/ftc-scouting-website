@@ -65,6 +65,19 @@ document.getElementById("rankingsSearch").addEventListener("input", function() {
     }
 });
 
+document.getElementById("allianceBtn").addEventListener("click", function() {
+    showScreen("allianceScreen");
+    displayAllianceList();
+});
+
+document.getElementById("allianceBackBtn").addEventListener("click", function() {
+    showScreen("homeScreen");
+});
+
+document.getElementById("closePopupBtn").addEventListener("click", function() {
+    document.getElementById("notesPopup").classList.add("hidden");
+});
+
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.add('hidden');
@@ -161,4 +174,80 @@ function displayTeams() {
             </tr>
         `;
     });
+}
+
+function getNotesForTeam(teamNumber) {
+    let entry = scoutingEntries.find(e => e.teamNumber === teamNumber);
+    return entry ? entry.notes : "No notes available";
+}
+
+function displayAllianceList() {
+    // sort teams by total average first
+    let sorted = [...teams].sort((a, b) => {
+        let totalA = parseFloat(getAverageAutoScore(a.teamNumber)) + parseFloat(getAverageTeleScore(a.teamNumber));
+        let totalB = parseFloat(getAverageAutoScore(b.teamNumber)) + parseFloat(getAverageTeleScore(b.teamNumber));
+        return totalB - totalA;
+    });
+
+    let list = document.getElementById("allianceList");
+    list.innerHTML = "";
+
+    sorted.forEach(function(team, index) {
+        let avgAuto = getAverageAutoScore(team.teamNumber);
+        let avgTele = getAverageTeleScore(team.teamNumber);
+        let total = (parseFloat(avgAuto) + parseFloat(avgTele)).toFixed(1);
+
+        let card = document.createElement("div");
+        card.className = "alliance-card";
+        card.draggable = true;
+        card.dataset.teamNumber = team.teamNumber;
+
+        card.innerHTML = `
+            <div class="alliance-rank">${index + 1}</div>
+            <div class="alliance-info">
+                <h3>${team.teamNumber} — ${team.teamName}</h3>
+                <p>Auto: ${avgAuto} | Tele: ${avgTele} | Total: ${total}</p>
+            </div>
+            <button class="notes-icon" onclick="openNotes(${team.teamNumber}, '${team.teamName}')">📋 Notes</button>
+        `;
+
+        // drag events
+        card.addEventListener("dragstart", function() {
+            card.classList.add("dragging");
+        });
+
+        card.addEventListener("dragend", function() {
+            card.classList.remove("dragging");
+            document.querySelectorAll(".alliance-card").forEach(c => c.classList.remove("drag-over"));
+            updateRankNumbers();
+        });
+
+        card.addEventListener("dragover", function(e) {
+            e.preventDefault();
+            let dragging = document.querySelector(".dragging");
+            if (dragging !== card) {
+                card.classList.add("drag-over");
+                list.insertBefore(dragging, card);
+            }
+        });
+
+        card.addEventListener("dragleave", function() {
+            card.classList.remove("drag-over");
+        });
+
+        list.appendChild(card);
+    });
+}
+
+function updateRankNumbers() {
+    let cards = document.querySelectorAll(".alliance-card");
+    cards.forEach(function(card, index) {
+        card.querySelector(".alliance-rank").innerHTML = index + 1;
+    });
+}
+
+function openNotes(teamNumber, teamName) {
+    document.getElementById("popupTeamName").innerHTML = teamName + " (" + teamNumber + ")";
+    document.getElementById("popupNotes").innerHTML = getNotesForTeam(teamNumber);
+    document.getElementById("notesPopup").classList.remove("hidden");
 }

@@ -200,3 +200,105 @@ tr:hover td {
     align-items: center;
     margin-bottom: 16px;
 }
+
+/* --- ALLIANCE SELECTION --- */
+#allianceList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 600px;
+}
+
+.alliance-card {
+    background-color: #16213e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: grab;
+    user-select: none;
+}
+
+.alliance-card:active {
+    cursor: grabbing;
+}
+
+.alliance-card.dragging {
+    opacity: 0.4;
+    border: 1px dashed #1a73e8;
+}
+
+.alliance-card.drag-over {
+    border: 1px solid #1a73e8;
+    background-color: #1a2a4a;
+}
+
+.alliance-rank {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1a73e8;
+    width: 30px;
+    text-align: center;
+}
+
+.alliance-info {
+    flex: 1;
+}
+
+.alliance-info h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.alliance-info p {
+    font-size: 12px;
+    color: #aaaaaa;
+}
+
+.notes-icon {
+    background: none;
+    border: 1px solid #aaaaaa;
+    color: #aaaaaa;
+    border-radius: 6px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.notes-icon:hover {
+    background-color: #ffffff22;
+}
+
+/* --- NOTES POPUP --- */
+.popup {
+    position: fixed;
+    inset: 0;
+    background-color: #00000088;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.popup-box {
+    background-color: #16213e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 24px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.popup-box h3 {
+    font-size: 18px;
+}
+
+.popup-box p {
+    font-size: 14px;
+    color: #aaaaaa;
+    min-height: 60px;
+}
