@@ -196,3 +196,10 @@ tr:hover td {
 .highlight {
     background-color: #1a472a;
 }
+
+.rankings-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
