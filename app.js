@@ -13,6 +13,7 @@ let teams = [
 let scores = [];
 let scoutingEntries = [];
 let averages = [];
+let allianceOrder = [];
 
 document.getElementById('teamsBtn').addEventListener("click", function() {
     showScreen('teamsScreen');
@@ -182,17 +183,19 @@ function getNotesForTeam(teamNumber) {
 }
 
 function displayAllianceList() {
-    // sort teams by total average first
-    let sorted = [...teams].sort((a, b) => {
-        let totalA = parseFloat(getAverageAutoScore(a.teamNumber)) + parseFloat(getAverageTeleScore(a.teamNumber));
-        let totalB = parseFloat(getAverageAutoScore(b.teamNumber)) + parseFloat(getAverageTeleScore(b.teamNumber));
-        return totalB - totalA;
-    });
+    // only sort if allianceOrder is empty (first time opening)
+    if (allianceOrder.length === 0) {
+        allianceOrder = [...teams].sort((a, b) => {
+            let totalA = parseFloat(getAverageAutoScore(a.teamNumber)) + parseFloat(getAverageTeleScore(a.teamNumber));
+            let totalB = parseFloat(getAverageAutoScore(b.teamNumber)) + parseFloat(getAverageTeleScore(b.teamNumber));
+            return totalB - totalA;
+        });
+    }
 
     let list = document.getElementById("allianceList");
     list.innerHTML = "";
 
-    sorted.forEach(function(team, index) {
+    allianceOrder.forEach(function(team, index) {
         let avgAuto = getAverageAutoScore(team.teamNumber);
         let avgTele = getAverageTeleScore(team.teamNumber);
         let total = (parseFloat(avgAuto) + parseFloat(avgTele)).toFixed(1);
@@ -211,7 +214,6 @@ function displayAllianceList() {
             <button class="notes-icon" onclick="openNotes(${team.teamNumber}, '${team.teamName}')">📋 Notes</button>
         `;
 
-        // drag events
         card.addEventListener("dragstart", function() {
             card.classList.add("dragging");
         });
@@ -220,6 +222,7 @@ function displayAllianceList() {
             card.classList.remove("dragging");
             document.querySelectorAll(".alliance-card").forEach(c => c.classList.remove("drag-over"));
             updateRankNumbers();
+            saveAllianceOrder();
         });
 
         card.addEventListener("dragover", function(e) {
@@ -236,6 +239,23 @@ function displayAllianceList() {
         });
 
         list.appendChild(card);
+    });
+}
+
+function saveAllianceOrder() {
+    let cards = document.querySelectorAll(".alliance-card");
+    allianceOrder = [];
+    cards.forEach(function(card) {
+        let teamNumber = parseInt(card.dataset.teamNumber);
+        let team = teams.find(t => t.teamNumber === teamNumber);
+        if (team) allianceOrder.push(team);
+    });
+}
+
+function updateRankNumbers() {
+    let cards = document.querySelectorAll(".alliance-card");
+    cards.forEach(function(card, index) {
+        card.querySelector(".alliance-rank").innerHTML = index + 1;
     });
 }
 
