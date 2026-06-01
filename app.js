@@ -93,6 +93,7 @@ function logData() {
     let teleScore = parseInt(document.getElementById("teleScoreInput").value);
     let defenseRating = parseInt(document.getElementById("defenseRatingInput").value);
     let reliabilityRating = parseInt(document.getElementById("reliabilityRatingInput").value);
+    let notes = document.getElementById("notesInput").value;
 
     scores.push({
         teamNumber: teamNumber,
@@ -178,8 +179,15 @@ function displayTeams() {
 }
 
 function getNotesForTeam(teamNumber) {
-    let entry = scoutingEntries.find(e => e.teamNumber === teamNumber);
-    return entry ? entry.notes : "No notes available";
+    let entries = scoutingEntries.filter(e => e.teamNumber == teamNumber);
+    if (entries.length === 0) return "No notes available";
+    
+    let allNotes = entries
+        .filter(e => e.notes !== "")
+        .map((e, index) => "Match " + (index + 1) + ": " + e.notes)
+        .join("\n");
+    
+    return allNotes !== "" ? allNotes : "No notes available";
 }
 
 function displayAllianceList() {
