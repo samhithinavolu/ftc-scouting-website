@@ -12,6 +12,7 @@
     <div id="homeScreen" class="screen">
         <h1>FTC Scouting App</h1>
         <div class="btn-group">
+            <button class="btn" id="addTeamBtn">Add Team</button>
             <button class="btn" id="teamsBtn">View Teams</button>
             <button class="btn" id="logMatchBtn">Log Match</button>
             <button class="btn" id="rankingsBtn">Rankings</button>
@@ -124,5 +125,21 @@
 
     <script src="app.js"></script>
 
+    <!-- ADD TEAM SCREEN -->
+    <div id="addTeamScreen" class="screen hidden">
+        <div class="topbar">
+            <button class="btn-back" id="addTeamBackBtn">← Back</button>
+            <h2>Add Team</h2>
+        </div>
+        <div class="content">
+            <div class="form-grid">
+                <label>Team Number</label>
+                <input type="number" id="addTeamNumberInput" placeholder="e.g. 12345" />
+                <label>Team Name</label>
+                <input type="text" id="addTeamNameInput" placeholder="e.g. Gear Heads" />
+            </div>
+            <button class="btn" id="addTeamSubmitBtn">Add Team</button>
+        </div>
+    </div>
 </body>
 </html>

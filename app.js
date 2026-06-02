@@ -15,68 +15,74 @@ let scoutingEntries = [];
 let averages = [];
 let allianceOrder = [];
 
-document.getElementById('teamsBtn').addEventListener("click", function() {
-    showScreen('teamsScreen');
-    displayTeams();
-});
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("addTeamBtn").addEventListener("click", () => showScreen("addTeamScreen"));
+    document.getElementById("addTeamSubmitBtn").addEventListener("click", () => addTeams());
+    document.getElementById("addTeamBackBtn").addEventListener("click", () => showScreen("homeScreen"));
 
-document.getElementById('logMatchBtn').addEventListener('click', () => showScreen('logMatchScreen'));
-
-document.getElementById("rankingsBtn").addEventListener("click", function() {
-    showScreen("rankingsScreen");
-    displayRankings();
-});
-
-document.getElementById('teamsBackBtn').addEventListener('click', () => showScreen('homeScreen'));
-document.getElementById('logMatchBackBtn').addEventListener('click', () => showScreen('homeScreen'));
-document.getElementById('rankingsBackBtn').addEventListener('click', () => showScreen('homeScreen'));
-
-document.getElementById('saveEntryBtn').addEventListener('click', () => logData());
-
-document.getElementById("sortAutoBtn").addEventListener("click", function() {
-    teams.sort((a, b) => getAverageAutoScore(b.teamNumber) - getAverageAutoScore(a.teamNumber));
-    displayRankings();
-});
-
-document.getElementById("sortTeleBtn").addEventListener("click", function() {
-    teams.sort((a, b) => getAverageTeleScore(b.teamNumber) - getAverageTeleScore(a.teamNumber));
-    displayRankings();
-});
-
-document.getElementById("sortTotalBtn").addEventListener("click", function() {
-    teams.sort((a, b) => {
-        let totalA = parseFloat(getAverageAutoScore(a.teamNumber)) + parseFloat(getAverageTeleScore(a.teamNumber));
-        let totalB = parseFloat(getAverageAutoScore(b.teamNumber)) + parseFloat(getAverageTeleScore(b.teamNumber));
-        return totalB - totalA;
+    document.getElementById('teamsBtn').addEventListener("click", function() {
+        showScreen('teamsScreen');
+        displayTeams();
     });
-    displayRankings();
-});
 
-document.getElementById("rankingsSearch").addEventListener("input", function() {
-    let searchValue = document.getElementById("rankingsSearch").value;
-    let rows = document.getElementById("rankingsBody").getElementsByTagName("tr");
+    document.getElementById('logMatchBtn').addEventListener('click', () => showScreen('logMatchScreen'));
 
-    for (let i = 0; i < rows.length; i++) {
-        let teamNumber = rows[i].getElementsByTagName("td")[1].innerHTML;
-        if (searchValue !== "" && teamNumber.includes(searchValue)) {
-            rows[i].classList.add("highlight");
-        } else {
-            rows[i].classList.remove("highlight");
+    document.getElementById("rankingsBtn").addEventListener("click", function() {
+        showScreen("rankingsScreen");
+        displayRankings();
+    });
+
+    document.getElementById('teamsBackBtn').addEventListener('click', () => showScreen('homeScreen'));
+    document.getElementById('logMatchBackBtn').addEventListener('click', () => showScreen('homeScreen'));
+    document.getElementById('rankingsBackBtn').addEventListener('click', () => showScreen('homeScreen'));
+
+    document.getElementById('saveEntryBtn').addEventListener('click', () => logData());
+
+    document.getElementById("sortAutoBtn").addEventListener("click", function() {
+        teams.sort((a, b) => getAverageAutoScore(b.teamNumber) - getAverageAutoScore(a.teamNumber));
+        displayRankings();
+    });
+
+    document.getElementById("sortTeleBtn").addEventListener("click", function() {
+        teams.sort((a, b) => getAverageTeleScore(b.teamNumber) - getAverageTeleScore(a.teamNumber));
+        displayRankings();
+    });
+
+    document.getElementById("sortTotalBtn").addEventListener("click", function() {
+        teams.sort((a, b) => {
+            let totalA = parseFloat(getAverageAutoScore(a.teamNumber)) + parseFloat(getAverageTeleScore(a.teamNumber));
+            let totalB = parseFloat(getAverageAutoScore(b.teamNumber)) + parseFloat(getAverageTeleScore(b.teamNumber));
+            return totalB - totalA;
+        });
+        displayRankings();
+    });
+
+    document.getElementById("rankingsSearch").addEventListener("input", function() {
+        let searchValue = document.getElementById("rankingsSearch").value;
+        let rows = document.getElementById("rankingsBody").getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            let teamNumber = rows[i].getElementsByTagName("td")[1].innerHTML;
+            if (searchValue !== "" && teamNumber.includes(searchValue)) {
+                rows[i].classList.add("highlight");
+            } else {
+                rows[i].classList.remove("highlight");
+            }
         }
-    }
-});
+    });
 
-document.getElementById("allianceBtn").addEventListener("click", function() {
-    showScreen("allianceScreen");
-    displayAllianceList();
-});
+    document.getElementById("allianceBtn").addEventListener("click", function() {
+        showScreen("allianceScreen");
+        displayAllianceList();
+    });
 
-document.getElementById("allianceBackBtn").addEventListener("click", function() {
-    showScreen("homeScreen");
-});
+    document.getElementById("allianceBackBtn").addEventListener("click", function() {
+        showScreen("homeScreen");
+    });
 
-document.getElementById("closePopupBtn").addEventListener("click", function() {
-    document.getElementById("notesPopup").classList.add("hidden");
+    document.getElementById("closePopupBtn").addEventListener("click", function() {
+        document.getElementById("notesPopup").classList.add("hidden");
+    });
 });
 
 function showScreen(screenId) {
@@ -84,6 +90,21 @@ function showScreen(screenId) {
         screen.classList.add('hidden');
     });
     document.getElementById(screenId).classList.remove('hidden');
+}
+
+function addTeams() {
+    let addTeamNumber = parseInt(document.getElementById("addTeamNumberInput").value);
+    let addTeamName = document.getElementById("addTeamNameInput").value;
+
+    teams.push({
+        teamNumber: addTeamNumber,
+        teamName: addTeamName
+    });
+
+    console.log("Teams array:", teams);
+
+    document.getElementById("addTeamNumberInput").value = "";
+    document.getElementById("addTeamNameInput").value = "";
 }
 
 function logData() {
