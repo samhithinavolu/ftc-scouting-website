@@ -16,9 +16,10 @@ let averages = [];
 let allianceOrder = [];
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("addTeamBtn").addEventListener("click", () => showScreen("addTeamScreen"));
     document.getElementById("addTeamSubmitBtn").addEventListener("click", () => addTeams());
     document.getElementById("addTeamBackBtn").addEventListener("click", () => showScreen("homeScreen"));
+
+    document.getElementById("addTeamBtn").addEventListener("click", () => showScreen("addTeamScreen"));
 
     document.getElementById('teamsBtn').addEventListener("click", function() {
         showScreen('teamsScreen');
@@ -30,6 +31,11 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("rankingsBtn").addEventListener("click", function() {
         showScreen("rankingsScreen");
         displayRankings();
+    });
+
+    document.getElementById("allianceBtn").addEventListener("click", function() {
+        showScreen("allianceScreen");
+        displayAllianceList();
     });
 
     document.getElementById('teamsBackBtn').addEventListener('click', () => showScreen('homeScreen'));
@@ -71,11 +77,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    document.getElementById("allianceBtn").addEventListener("click", function() {
-        showScreen("allianceScreen");
-        displayAllianceList();
-    });
-
     document.getElementById("allianceBackBtn").addEventListener("click", function() {
         showScreen("homeScreen");
     });
@@ -100,8 +101,6 @@ function addTeams() {
         teamNumber: addTeamNumber,
         teamName: addTeamName
     });
-
-    console.log("Teams array:", teams);
 
     document.getElementById("addTeamNumberInput").value = "";
     document.getElementById("addTeamNameInput").value = "";
